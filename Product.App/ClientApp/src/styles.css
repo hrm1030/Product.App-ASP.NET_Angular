@@ -9,6 +9,14 @@ code {
   color: #e01a76;
 }
 
+table {
+  width: 100%;
+}
+
+.pull-right {
+  float: right;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;

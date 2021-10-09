@@ -28,7 +28,8 @@ import {
   MatSnackBarModule,
   MatAutocompleteModule,
   MatProgressSpinnerModule,
-  MatSliderModule
+  MatSliderModule,
+  MatMenuModule
 } from '@angular/material';
 
 @NgModule({
@@ -59,7 +60,8 @@ import {
     MatDialogModule,
     MatSnackBarModule,
     MatAutocompleteModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatMenuModule
   ],
   exports: [
     MatButtonModule,
@@ -87,7 +89,8 @@ import {
     MatSnackBarModule,
     MatAutocompleteModule,
     MatProgressSpinnerModule,
-    MatSliderModule
+    MatSliderModule,
+    MatMenuModule
   ],
   providers: [
     MatDatepickerModule,

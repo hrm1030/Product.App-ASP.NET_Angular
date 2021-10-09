@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent {
+export class NavMenuComponent implements OnInit {
   isExpanded = false;
 
   collapse() {
@@ -15,4 +18,23 @@ export class NavMenuComponent {
   toggle() {
     this.isExpanded = !this.isExpanded;
   }
+
+  constructor(
+    private router: Router,
+    public userService: UserService
+  ) {
+    this.userService.loggedInUser = JSON.parse(localStorage.getItem('user'));
+  }
+
+  ngOnInit() {
+
+  }
+
+  onLogout() {
+    console.log('logout')
+    localStorage.setItem('user', null);
+    this.userService.loggedInUser = null;
+    this.router.navigate(['/auth/signin']);
+  }
+
 }

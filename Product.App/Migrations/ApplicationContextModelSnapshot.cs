@@ -51,6 +51,55 @@ namespace Product.App.Migrations
 
                     b.ToTable("Users");
                 });
+            modelBuilder.Entity("Product.App.Models.Category", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                b.Property<DateTime>("CreatedAt")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("varchar(100)");
+
+                b.HasKey("Id");
+
+                b.ToTable("Categories");
+            });
+
+            modelBuilder.Entity("Product.App.Models.Product", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                b.Property<DateTime>("CreatedAt")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("varchar(100)");
+
+                b.Property<string>("CatId")
+                    .IsRequired()
+                    .HasColumnType("int");
+
+                b.Property<string>("Price")
+                    .IsRequired()
+                    .HasColumnType("float");
+
+                b.Property<string>("ImageUrl")
+                    .IsRequired()
+                    .HasColumnType("varchar(255)");
+
+                b.HasKey("Id");
+
+                b.ToTable("Products");
+            });
 #pragma warning restore 612, 618
         }
     }

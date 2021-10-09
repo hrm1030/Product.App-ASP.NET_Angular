@@ -8,7 +8,16 @@ import { User } from '../models/user.model';
 })
 export class UserService {
   public httpOptions: any;
-  _baseUrl: string = "https://localhost:44345";
+  private _loggedInUser?: User;
+
+  get loggedInUser(): User {
+    return this._loggedInUser;
+  }
+  set loggedInUser(user: User) {
+      this._loggedInUser = user;
+  }
+
+  _baseUrl: string = window.location.origin;
   userData: User = new User();
 
   constructor(private http: HttpClient) {
@@ -23,8 +32,7 @@ export class UserService {
 
   signin(data) {
     let requestUrl = `${this._baseUrl}/api/Users/signin?email=${data.email}&password=${data.password}`;
-    console.log(this.http.get<string>(requestUrl))
-    return this.http.get<string>(requestUrl);
+    return this.http.get(requestUrl);
   }
 
   signup(data: any) {
@@ -37,13 +45,18 @@ export class UserService {
     return this.http.get<boolean>(requestUrl);
   }
 
-  userDelete(id: number) {
+  updateUser(userData) {
+    let requestUrl = `${this._baseUrl}/api/Users/${userData.id}`;
+    return this.http.put(requestUrl, userData);
+  }
+
+  deleteUser(id: number) {
     let requestUrl = `${this._baseUrl}/api/Users/${id}`;
     return this.http.delete(requestUrl);
   }
 
-  updatePermission(userData: User) {
-    let requestUrl = `${this._baseUrl}/api/Users/${userData.Id}`;
-    return this.http.put(requestUrl, userData);
+  getUsers() {
+    let requestUrl = `${this._baseUrl}/api/Users`;
+    return this.http.get(requestUrl);
   }
 }

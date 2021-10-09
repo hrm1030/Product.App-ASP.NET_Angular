@@ -55,15 +55,8 @@ export class HomeComponent implements OnInit {
   toppings = new FormControl();
   toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
-  formatLabel(value: number) {
-    if (value >= 1000) {
-      return Math.round(value / 1000) + 'k';
-    }
-    return value;
-  }
 
   ngOnInit() {
-    console.log(this.price)
     if(this.products.length > 0 ) {
       this.isLoadingData = false;
     }

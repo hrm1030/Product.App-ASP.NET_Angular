@@ -4,4 +4,6 @@ export class User {
   Email: string;
   Password: string;
   IsAdmin: boolean;
+  CreatedAt: string;
+  UpdatedAt: string;
 }

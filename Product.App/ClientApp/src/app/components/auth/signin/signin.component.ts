@@ -23,7 +23,7 @@ export class SigninComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
   hide = true;
-  errorMessage: string = '';
+  ErrorMessage: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,14 +46,20 @@ export class SigninComponent implements OnInit {
   onSubmit() {
     var loginData = this.loginForm.value;
     if(loginData.email != '' && loginData.password != '') {
-      this.userService!.signin(loginData).subscribe(
+      this.userService.signin(loginData).subscribe(
         result => {
-          if(result === "No user") {
-            this.errorMessage = "This user doesn't exist. Please enter correctly.";
-          } else if(result === "Password invalid") {
-            this.errorMessage = "Password is invalid. Please enter correctly.";
-          } else if(result === "Success") {
-            console.log(result);
+          if(result['msg'] === "No user") {
+            this.ErrorMessage = "This user doesn't exist. Please enter correctly.";
+            this.email.setErrors([{ isEmailError : true}]);
+            this.email.setValue('');
+            this.password.setValue('');
+          } else if(result['msg'] === "Password invalid") {
+            this.ErrorMessage = "Password is invalid. Please enter correctly.";
+            this.password.setErrors([{ isPasswordError : true}]);
+            this.password.setValue('');
+          } else if(result['msg'] === "Success") {
+            this.userService.loggedInUser = result['user'];
+            localStorage.setItem('user', JSON.stringify(result['user']));
             this.router.navigate(['/']);
           }
         },

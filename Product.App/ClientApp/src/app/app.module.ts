@@ -7,24 +7,34 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './_layout/nav-menu/nav-menu.component';
 import { HomeComponent } from './components/home/home.component';
-import { CounterComponent } from './components/counter/counter.component';
-import { FetchDataComponent } from './components/fetch-data/fetch-data.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatStepperModule } from '@angular/material';
 /* Angular material */
 import { AngularMaterialModule } from './angular-material.module';
 import { SigninComponent } from './components/auth/signin/signin.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { UsersComponent } from './components/admin/users/users.component';
+import { CategoryComponent } from './components/admin/category/category.component';
+import { ProductComponent } from './components/admin/product/product.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { DeleteDialogComponent } from './_shared/delete-dialog/delete-dialog.component';
+import { CategoryAddDialogComponent } from './_shared/category-add-dialog/category-add-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    AdminComponent,
+    UsersComponent,
+    CategoryComponent,
+    ProductComponent,
+    ProfileComponent,
+    DeleteDialogComponent,
+    CategoryAddDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -33,8 +43,6 @@ import { SignupComponent } from './components/auth/signup/signup.component';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
       {
         path: 'auth',
         children: [
@@ -47,6 +55,29 @@ import { SignupComponent } from './components/auth/signup/signup.component';
             component: SignupComponent
           }
         ]
+      },
+      {
+        path: 'admin',
+        component: AdminComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: 'users',
+            pathMatch: 'full'
+          },
+          {
+            path: 'categories',
+            component: CategoryComponent
+          },
+          {
+            path: 'products',
+            component: ProductComponent
+          },
+          {
+            path: 'users',
+            component: UsersComponent
+          }
+        ]
       }
     ]),
     BrowserAnimationsModule,
@@ -54,6 +85,7 @@ import { SignupComponent } from './components/auth/signup/signup.component';
     MatStepperModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DeleteDialogComponent, CategoryAddDialogComponent]
 })
 export class AppModule { }

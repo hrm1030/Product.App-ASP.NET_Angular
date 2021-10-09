@@ -81,16 +81,16 @@ namespace Product.App.Controllers
                 var user = await _context.Users.Where(user => user.Email == email).FirstOrDefaultAsync();
                 if(user == null)
                 {
-                    return Ok("No user");
+                    return Ok(new { msg = "No user" });
                 } else
                 {
                     var passwordVerifiedUser = await _context.Users.Where(user => user.Email == email && user.Password == password).FirstOrDefaultAsync();
                     if(passwordVerifiedUser == null)
                     {
-                        return Ok("Password invalid");
+                        return Ok(new { msg = "Password invalid" });
                     } else
                     {
-                        return Ok("Success");
+                        return Ok(new { msg = "Success", user = user });
                     }
                 }
             }
