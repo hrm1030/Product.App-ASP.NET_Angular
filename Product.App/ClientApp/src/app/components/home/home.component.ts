@@ -87,12 +87,20 @@ export class HomeComponent implements OnInit {
   }
 
   onAddCart(product) {
-    this.cartList.push(product);
-    localStorage.setItem('order', JSON.stringify(this.cartList));
-    this.userService.loggedInUser.order = JSON.parse(localStorage.getItem('order'));
-    this.snackBar.open("Successfully added to your cart.", 'x', {
-      horizontalPosition: 'right',
-      verticalPosition: 'top'
-    });
+    if(this.userService.loggedInUser != null) {
+      this.cartList.push(product);
+      localStorage.setItem('order', JSON.stringify(this.cartList));
+      this.userService.loggedInUser.order = JSON.parse(localStorage.getItem('order'));
+      this.snackBar.open("Successfully added to your cart.", 'x', {
+        horizontalPosition: 'right',
+        verticalPosition: 'top'
+      });
+    } else {
+      this.snackBar.open("Please sign in.", 'x', {
+        horizontalPosition: 'right',
+        verticalPosition: 'top'
+      });
+    }
+
   }
 }

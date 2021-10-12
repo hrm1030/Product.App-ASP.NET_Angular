@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatPaginator, MatSnackBar, MatTableDataSource } from '@angular/material';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { DeleteDialogComponent } from 'src/app/_shared/delete-dialog/delete-dialog.component';
@@ -17,7 +17,8 @@ export class UsersComponent implements AfterViewInit {
 
   constructor(
     private userService: UserService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngAfterViewInit() {
@@ -36,7 +37,10 @@ export class UsersComponent implements AfterViewInit {
   onChangePermission(user, event: Event) {
     this.userService.updateUser(user).subscribe(
       result => {
-
+        this.snackBar.open('Successfully changed user permission.', 'x', {
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
       },
       error => {
         console.log(error);

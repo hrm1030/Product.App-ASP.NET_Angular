@@ -20,7 +20,7 @@ export class ProductComponent implements AfterViewInit {
   categoryKey: number = 0;
   productKey: string = '';
   minPrice: number = 0;
-  maxPrice: number = 0;
+  maxPrice: number = 100000;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
@@ -134,6 +134,22 @@ export class ProductComponent implements AfterViewInit {
 
   onSearchByProduct(productName) {
     this.productKey = productName;
+    this.onSearch();
+  }
+
+  onSearchByMaxPrice(maxPrice) {
+    if(maxPrice == '') {
+      maxPrice = 0;
+    }
+    this.maxPrice = maxPrice;
+    this.onSearch();
+  }
+
+  onSearchByMinPrice(minPrice) {
+    if(minPrice == '') {
+      minPrice = 0;
+    }
+    this.minPrice = minPrice;
     this.onSearch();
   }
 

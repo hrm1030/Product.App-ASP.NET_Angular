@@ -8,16 +8,26 @@
       <mat-form-field appearance="fill" class="mr-1">
         <mat-label>Category</mat-label>
         <mat-select (selectionChange)="onSearchByCategory($event)">
-          <mat-option [value]="0"></mat-option>
+          <mat-option value="0">All</mat-option>
           <mat-option [value]="category.id" *ngFor="let category of categories">
             {{ category.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field class="example-form-field" appearance="fill">
+      <mat-form-field class="example-form-field mr-1" appearance="fill">
         <mat-label>Search</mat-label>
         <input matInput type="text" [(ngModel)]="value" (change)="onSearchByProduct(value)">
         <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="example-form-field mr-1" appearance="fill">
+        <mat-label>Min price</mat-label>
+        <input matInput type="text" [(ngModel)]="minPrice" (change)="onSearchByMinPrice(minPrice)">
+        <span matSuffix>$</span>
+      </mat-form-field>
+      <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>Max price</mat-label>
+        <input matInput type="text" [(ngModel)]="maxPrice" (change)="onSearchByMaxPrice(maxPrice)">
+        <span matSuffix>$</span>
       </mat-form-field>
       <button class="pull-right" mat-raised-button color="primary" (click)="onAdd()">
         <mat-icon>add</mat-icon> <mat-label>New Add</mat-label>
