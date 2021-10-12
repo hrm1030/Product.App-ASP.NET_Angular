@@ -1,4 +1,4 @@
 export interface DeleteDialogData {
-  itemId: number,
+  itemId: number;
   itemName: string
 }

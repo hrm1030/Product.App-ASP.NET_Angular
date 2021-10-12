@@ -19,6 +19,54 @@ namespace Product.App.Migrations
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Product.App.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Product.App.Models.Products", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CatId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
+                });
+
             modelBuilder.Entity("Product.App.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -51,55 +99,6 @@ namespace Product.App.Migrations
 
                     b.ToTable("Users");
                 });
-            modelBuilder.Entity("Product.App.Models.Category", b =>
-            {
-                b.Property<int>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("int")
-                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                b.Property<DateTime>("CreatedAt")
-                    .HasColumnType("datetime2");
-
-                b.Property<string>("Name")
-                    .IsRequired()
-                    .HasColumnType("varchar(100)");
-
-                b.HasKey("Id");
-
-                b.ToTable("Categories");
-            });
-
-            modelBuilder.Entity("Product.App.Models.Product", b =>
-            {
-                b.Property<int>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("int")
-                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                b.Property<DateTime>("CreatedAt")
-                    .HasColumnType("datetime2");
-
-                b.Property<string>("Name")
-                    .IsRequired()
-                    .HasColumnType("varchar(100)");
-
-                b.Property<string>("CatId")
-                    .IsRequired()
-                    .HasColumnType("int");
-
-                b.Property<string>("Price")
-                    .IsRequired()
-                    .HasColumnType("float");
-
-                b.Property<string>("ImageUrl")
-                    .IsRequired()
-                    .HasColumnType("varchar(255)");
-
-                b.HasKey("Id");
-
-                b.ToTable("Products");
-            });
 #pragma warning restore 612, 618
         }
     }

@@ -30,6 +30,8 @@ namespace Product.App
             });
             services.AddDbContext<ApplicationContext>(optionns =>
                 optionns.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+            var connectionString = new ConnectionString(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddSingleton(connectionString);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

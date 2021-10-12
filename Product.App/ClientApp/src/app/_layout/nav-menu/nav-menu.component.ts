@@ -24,6 +24,10 @@ export class NavMenuComponent implements OnInit {
     public userService: UserService
   ) {
     this.userService.loggedInUser = JSON.parse(localStorage.getItem('user'));
+    if(this.userService.loggedInUser != null) {
+      this.userService.loggedInUser.order = JSON.parse(localStorage.getItem('order'));
+    }
+
   }
 
   ngOnInit() {
@@ -32,7 +36,9 @@ export class NavMenuComponent implements OnInit {
 
   onLogout() {
     console.log('logout')
+    var clearOrder = [];
     localStorage.setItem('user', null);
+    localStorage.setItem('order', JSON.stringify(clearOrder));
     this.userService.loggedInUser = null;
     this.router.navigate(['/auth/signin']);
   }

@@ -20,7 +20,10 @@ namespace Product.App.Models
         [Column(TypeName = "varchar(255)")]
         public string ImageUrl { get; set; }
         [Required]
+        [Column(TypeName = "float")]
         public float Price { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        [NotMapped]
+        public string CatName { get; set; }
     }
 }

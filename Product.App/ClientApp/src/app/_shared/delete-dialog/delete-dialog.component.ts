@@ -25,15 +25,4 @@ export class DeleteDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  onConfirm(id) {
-    this.userService.deleteUser(id).subscribe(
-      result => {
-
-      },
-      error => {
-        console.log(error);
-      }
-    )
-  }
-
 }

@@ -1,59 +1,15 @@
-<!-- <header>
-  <nav
-    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
-  >
-    <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">ProductApp</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
-        [ngClass]="{ show: isExpanded }"
-      >
-        <ul class="navbar-nav flex-grow">
-          <li
-            class="nav-item"
-            [routerLinkActive]="['link-active']"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/counter']"
-              >Counter</a
-            >
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
-              >Fetch data</a
-            >
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header> -->
 <mat-toolbar color="primary">
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <span [routerLink]="['/']" style="cursor: pointer;">ProductApp</span>
+  <span [routerLink]="['/']" style="cursor: pointer;">GalleryApp</span>
   <span class="navbar-spacer"></span>
   <button mat-button *ngIf="userService.loggedInUser != null && userService.loggedInUser.isAdmin === true" matTooltip="Admin panel" [routerLink]="['/admin']">
     <mat-icon>settings_suggest</mat-icon>
     <mat-label>Admin panel</mat-label>
   </button>
-  <button mat-icon-button class="example-icon favorite-icon" *ngIf="userService.loggedInUser != null" aria-label="Example icon-button with heart icon" matTooltip="My Cart">
-    <mat-icon matBadge="0" matBadgeColor="accent">shopping_cart</mat-icon>
+  <button mat-icon-button class="example-icon favorite-icon" [routerLink]="['/order']" *ngIf="userService.loggedInUser != null" aria-label="Example icon-button with heart icon" matTooltip="My Cart">
+    <mat-icon matBadge="{{ userService.loggedInUser.order.length }}" matBadgeColor="accent">shopping_cart</mat-icon>
   </button>
   <button mat-button class="example-icon" *ngIf="userService.loggedInUser == null" matTooltip="Login" [routerLink]="['/auth/signin']">
     <mat-icon>person</mat-icon> <mat-label>Login</mat-label>
@@ -64,7 +20,7 @@
     <mat-icon>arrow_drop_down</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>
+    <button mat-menu-item [routerLink]="['/profile']">
       <mat-icon>manage_accounts</mat-icon>
       <span>Your Profile</span>
     </button>

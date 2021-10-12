@@ -45,7 +45,7 @@ namespace Product.App.Controllers
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> UpdateUser(int id, User user)
         {
             if (id != user.Id)
             {
@@ -71,6 +71,22 @@ namespace Product.App.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpPut("update_profile/{id}")]
+        public async Task<IActionResult> UpdateProfile(int id, User user)
+        {
+            var isUser = await _context.Users.Where(u => u.Id == id && u.Password == user.CurrentPassword).FirstOrDefaultAsync();
+            if(isUser != null)
+            {
+                //_context.Users.Update(user);
+                isUser.Password = user.Password;
+                await _context.SaveChangesAsync();
+                return Ok(new { msg = "success" });
+            } else
+            {
+                return Ok(new { msg = "current password invalid" });
+            }
         }
 
         [HttpGet("signin")]
@@ -149,6 +165,27 @@ namespace Product.App.Controllers
                 }
             } 
             catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("checking_email_by_profile")]
+        public async Task<IActionResult> CheckingEmailByProfile(string email, int id)
+        {
+            try
+            {
+                var user = await _context.Users.Where(user => user.Email == email && user.Id != id).FirstOrDefaultAsync();
+                if (user == null)
+                {
+                    return Ok(true);
+                }
+                else
+                {
+                    return Ok(false);
+                }
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

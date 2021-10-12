@@ -45,8 +45,18 @@ export class UserService {
     return this.http.get<boolean>(requestUrl);
   }
 
+  checkingEmailByProfile(email: string, id: number) {
+    let requestUrl = `${this._baseUrl}/api/Users/checking_email_by_profile?email=${email}&id=${id}`;
+    return this.http.get<boolean>(requestUrl);
+  }
+
   updateUser(userData) {
     let requestUrl = `${this._baseUrl}/api/Users/${userData.id}`;
+    return this.http.put(requestUrl, userData);
+  }
+
+  updateProfile(userData, id) {
+    let requestUrl = `${this._baseUrl}/api/Users/update_profile/${id}`;
     return this.http.put(requestUrl, userData);
   }
 

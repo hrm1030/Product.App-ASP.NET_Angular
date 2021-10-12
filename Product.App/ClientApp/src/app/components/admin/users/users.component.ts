@@ -56,8 +56,18 @@ export class UsersComponent implements AfterViewInit {
     dialogRef.afterClosed().subscribe(
       result => {
         if(result === 'yes') {
-          this.userData.data.splice(index, 1);
-          this.userData._updateChangeSubscription();
+          this.userService.deleteUser(user.id).subscribe(
+            result => {
+              this.isLoadingData = true;
+              this.userData.data.splice(index, 1);
+              this.userData._updateChangeSubscription();
+              this.isLoadingData = false;
+            },
+            error => {
+              console.log(error);
+            }
+          )
+
         }
       }
     )

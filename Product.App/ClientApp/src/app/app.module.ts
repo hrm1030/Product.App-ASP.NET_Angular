@@ -20,6 +20,8 @@ import { ProductComponent } from './components/admin/product/product.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { DeleteDialogComponent } from './_shared/delete-dialog/delete-dialog.component';
 import { CategoryAddDialogComponent } from './_shared/category-add-dialog/category-add-dialog.component';
+import { ProductAddDialogComponent } from './_shared/product-add-dialog/product-add-dialog.component';
+import { OrderComponent } from './components/order/order.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { CategoryAddDialogComponent } from './_shared/category-add-dialog/catego
     ProductComponent,
     ProfileComponent,
     DeleteDialogComponent,
-    CategoryAddDialogComponent
+    CategoryAddDialogComponent,
+    ProductAddDialogComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -78,6 +82,14 @@ import { CategoryAddDialogComponent } from './_shared/category-add-dialog/catego
             component: UsersComponent
           }
         ]
+      },
+      {
+        path: 'order',
+        component: OrderComponent
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent
       }
     ]),
     BrowserAnimationsModule,
@@ -86,6 +98,10 @@ import { CategoryAddDialogComponent } from './_shared/category-add-dialog/catego
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DeleteDialogComponent, CategoryAddDialogComponent]
+  entryComponents: [
+    DeleteDialogComponent,
+    CategoryAddDialogComponent,
+    ProductAddDialogComponent
+  ]
 })
 export class AppModule { }

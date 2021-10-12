@@ -59,7 +59,11 @@ export class SigninComponent implements OnInit {
             this.password.setValue('');
           } else if(result['msg'] === "Success") {
             this.userService.loggedInUser = result['user'];
-            localStorage.setItem('user', JSON.stringify(result['user']));
+            this.userService.loggedInUser.order = [];
+            localStorage.setItem('user', JSON.stringify(this.userService.loggedInUser));
+
+            var clearOrder = [];
+            localStorage.setItem('order', JSON.stringify(clearOrder));
             this.router.navigate(['/']);
           }
         },

@@ -6,4 +6,5 @@ export class User {
   IsAdmin: boolean;
   CreatedAt: string;
   UpdatedAt: string;
+  order: any;
 }

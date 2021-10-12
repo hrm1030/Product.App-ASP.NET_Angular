@@ -27,6 +27,34 @@ namespace Product.App.Controllers
             return await _context.Categories.ToListAsync();
         }
 
+        [HttpGet("search")]
+        public async Task<ActionResult> SearchCategory(string key)
+        {
+            try
+            {
+                var categories = await _context.Categories.Where(c => c.Name.Contains(key)).ToListAsync();
+                return Ok(categories);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("checking_category")]
+        public async Task<ActionResult<bool>> CheckingCategory(string categoryName)
+        {
+            var category = await _context.Categories.Where(c => c.Name == categoryName).FirstOrDefaultAsync();
+            if(category == null)
+            {
+                return Ok(true);
+            }
+            else
+            {
+                return Ok(false);
+            }
+        }
+
         // GET: api/Categories/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Category>> GetCategory(int id)
@@ -44,7 +72,7 @@ namespace Product.App.Controllers
         // PUT: api/Categories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, Category category)
+        public async Task<IActionResult> UpdateCategory(int id, Category category)
         {
             if (id != category.Id)
             {
@@ -74,8 +102,8 @@ namespace Product.App.Controllers
 
         // POST: api/Categories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory(Category category)
+        [HttpPost("add_category")]
+        public async Task<ActionResult<Category>> AddCategory(Category category)
         {
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
