@@ -24,6 +24,9 @@ namespace Product.App.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
+
+
+            migrationBuilder.Sql(@"INSERT INTO Users (UserName, Email, Password, IsAdmin, CreatedAt, UpdatedAt) values ('admin', 'admin@gmail.com', 'administrator', 1, '2021-10-21 00:00:00', '2021-10-21 00:00:00')");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
